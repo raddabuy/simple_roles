@@ -15,7 +15,7 @@ class Article extends Model
 
     protected static function booted()
     {
-        if(auth()->check() && !auth()->user()->is_admin){
+        if(auth()->check() && !auth()->user()->is_admin && !auth()->user()->is_publisher){
             static::addGlobalScope('user', function (Builder $builder) {
                 $builder->where('user_id', auth()->id());
             });
@@ -24,5 +24,5 @@ class Article extends Model
 
     use HasFactory;
 
-    protected $fillable = ['title', 'full_text', 'category_id', 'user_id'];
+    protected $fillable = ['title', 'full_text', 'category_id', 'user_id', 'published_at'];
 }

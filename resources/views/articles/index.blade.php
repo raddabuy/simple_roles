@@ -6,7 +6,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Articles') }}</div>
-
                 <div class="card-body">
                     <a class="btn btn-primary" href="{{ route('articles.create') }}">New Article</a>
                     <br /><br />
