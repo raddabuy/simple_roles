@@ -5,12 +5,13 @@ namespace Tests\Feature;
 use App\Models\Article;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class PermissionTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     public function testSimpleUserCannotAccessCategories()
     {

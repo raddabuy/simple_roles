@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Article;
+use App\Policies\ArticlePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+
+//use Illuminate\Contracts\Auth\Access\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Article::class  => ArticlePolicy::class
     ];
 
     /**
@@ -25,6 +30,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('publish-articles', function ($user) {
+            return $user->is_admin || $user->is_publisher;
+        });
     }
 }
+

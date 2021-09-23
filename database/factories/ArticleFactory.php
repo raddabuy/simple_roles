@@ -2,6 +2,8 @@
 namespace Database\Factories;
 
 use App\Models\Article;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 
@@ -23,7 +25,9 @@ class ArticleFactory extends Factory
     {
         return [
             'title' => $this->faker->name,
-            'full_text' => $this->faker->name
+            'full_text' => $this->faker->name,
+            'user_id' => User::all()->random()->id,
+            'category_id' => Category::all()->random()->id
         ];
     }
 }

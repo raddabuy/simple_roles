@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Category;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -41,7 +42,7 @@ class ArticleController extends Controller
     {
         Article::create($request->all() + [
             'user_id' => auth()->id(),
-            'published_at' => (auth()->user()->is_admin || auth()->user()->is_publisher)
+            'published_at' => Gate::allows('publish-articles')
                                 &&$request->input('published')? now(): null
         ]);
 
@@ -67,7 +68,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-
+        $this->authorize('update', $article);
         $categories = Category::all();
 
         return view('articles.edit', compact('article', 'categories'));
@@ -82,6 +83,8 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
+        $this->authorize('update', $article);
+
         $data = $request->all();
 
         if(auth()->user()->is_admin || auth()->user()->is_publisher){
@@ -100,6 +103,8 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
+        $this->authorize('update', $article);
+
         $article->delete();
 
         return redirect()->route('articles.index');
