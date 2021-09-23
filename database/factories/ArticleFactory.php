@@ -27,7 +27,7 @@ class ArticleFactory extends Factory
             'title' => $this->faker->name,
             'full_text' => $this->faker->name,
             'user_id' => User::all()->random()->id,
-            'category_id' => Category::all()->random()->id
+//            'category_id' => Category::all()->random()->id
         ];
     }
 }

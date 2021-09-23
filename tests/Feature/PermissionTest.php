@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class PermissionTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     public function testSimpleUserCannotAccessCategories()
     {
@@ -109,7 +109,7 @@ class PermissionTest extends TestCase
         $user = User::factory()->create();
 
         $articleData = ['title' => 'Title', 'full_text' => 'Full Text', 'published' => 1];
-        $response = $this->actingAs($user)->post('articles', $articleData);
+        $response = $this->actingAs($user)->post('/articles', $articleData);
         $response->assertRedirect();
 
         $article = Article::firstOrFail();
