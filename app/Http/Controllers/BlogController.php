@@ -8,6 +8,6 @@ class BlogController extends Controller
 {
     public function getSingle($slug, $id)
     {
-        return $slug
+        return $slug;
     }
 }
