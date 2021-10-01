@@ -17,6 +17,11 @@
                             <input type="text" name="title" class="form-control" value="{{ $article->title }}" />
                             <br />
 
+                            Slug:
+                            <br />
+                            <input type="text" name="slug" class="form-control" value="{{ $article->slug }}" />
+                            <br />
+
                             Full text:
                             <br />
                             <textarea class="form-control" rows="10" name="full_text">{{ $article->full_text }}</textarea>

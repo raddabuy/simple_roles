@@ -20,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('blog/{slug}/{id}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle']);
 
 Route::group(['middleware' => 'auth'], function (){
     Route::resource('articles', 'ArticleController');

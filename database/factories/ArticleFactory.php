@@ -23,11 +23,13 @@ class ArticleFactory extends Factory
      */
     public function definition()
     {
+        $title = $this->faker->word;
         return [
-            'title' => $this->faker->name,
+            'title' => $title,
+            'slug' => $title,
             'full_text' => $this->faker->name,
             'user_id' => User::all()->random()->id,
-//            'category_id' => Category::all()->random()->id
+            'category_id' => Category::all()->random()->id
         ];
     }
 }

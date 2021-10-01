@@ -13,6 +13,7 @@
                         <thead>
                         <tr>
                             <th>Title</th>
+                            <th>URL</th>
                         @can('see-article-user')
                             <th>User</th>
                         @endcan
@@ -25,6 +26,7 @@
                         @forelse ($articles as $article)
                         <tr>
                             <td>{{ $article->title }}</td>
+                            <td><a href="{{url($article->slug)}}">{{ url($article->slug) }}</a></td>
                         @can('see-article-user')
                             <td>{{ $article->user->name }}</td>
                         @endcan
@@ -45,8 +47,10 @@
                             <td colspan="3" class="text-center">No articles found.</td>
                         </tr>
                         @endforelse
-                        </tbody>
                     </table>
+                    <div class="text-center">
+                        {!! $articles->links()!!}
+                    </div>
                 </div>
             </div>
         </div>
